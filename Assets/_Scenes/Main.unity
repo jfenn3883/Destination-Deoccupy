@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 366370154}
   - component: {fileID: 366370153}
   - component: {fileID: 366370152}
-  - component: {fileID: 366370151}
+  - component: {fileID: 366370155}
   m_Layer: 7
   m_Name: firespirit_0
   m_TagString: Fighter
@@ -142,20 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &366370151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 366370150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fae890860b3d29245a9d5c5b70918379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 577101140}
-  speed: 0.2
 --- !u!61 &366370152
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,6 +235,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &366370155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366370150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82e8f9b2f17a234c8dbf0aab4065fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 577101140}
+  speed: 0.5
 --- !u!1 &397037141
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 577101139}
   - component: {fileID: 577101138}
   - component: {fileID: 577101137}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: player_0
   m_TagString: Fighter
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 947922240}
   - component: {fileID: 947922239}
   - component: {fileID: 947922241}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: sword_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,6 @@ GameObject:
   - component: {fileID: 1565735018}
   - component: {fileID: 1565735017}
   - component: {fileID: 1565735016}
-  - component: {fileID: 1565735015}
   - component: {fileID: 1565735019}
   m_Layer: 7
   m_Name: goblin_0
@@ -682,20 +681,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1565735015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565735014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fae890860b3d29245a9d5c5b70918379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 577101140}
-  speed: 0.5
 --- !u!61 &1565735016
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -798,12 +783,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1565735014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a43fd6fea4e85e46b2f13efe27cd91c, type: 3}
+  m_Script: {fileID: 11500000, guid: f938aa181692d4642b6da7614b0ce883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoint: 10
-  maxHitpoint: 10
-  pushRecoverySpeed: 0.2
+  target: {fileID: 577101140}
+  speed: 0.5
 --- !u!1 &1604442212
 GameObject:
   m_ObjectHideFlags: 0
