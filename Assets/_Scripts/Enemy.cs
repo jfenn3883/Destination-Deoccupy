@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform target;
+  public Transform target;
     protected BoxCollider2D boxCollider;
     protected Vector3 moveDelta;
     protected RaycastHit2D hit;
@@ -68,5 +68,5 @@ protected virtual void EnemyHit(){
     if(health <= 0){
         Destroy(this.gameObject);
     }
-}
+}  
 }

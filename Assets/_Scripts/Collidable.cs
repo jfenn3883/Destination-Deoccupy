@@ -30,8 +30,8 @@ public abstract class Collidable : MonoBehaviour
         }
     }
 
-    protected virtual void onCollide(Collider2D other)
+    protected virtual void onCollide(Collider2D coll)
     {
-        Debug.Log(other.name);
+        Debug.Log(coll.name);
     }
 }
