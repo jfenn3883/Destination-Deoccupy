@@ -8,6 +8,6 @@ public class Goblin : Enemy
     protected override void Start()
     {
         base.Start();
-        health = 50; 
+        health = 5; 
     }
 }
