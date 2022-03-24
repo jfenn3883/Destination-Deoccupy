@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
        }
 
         //if enemy collides with wall/ in y-direction
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Player", "Blocking","Actor"));
+       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Player", "Blocking","Enemy"));
        if(hit.collider == null) //if there is nothing in the player's way in the y-direction
        {
            //move object in y
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
            EnemyHit();
         }
        //if enemy collides with wall/player/enemy in x- direction
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Player", "Blocking","Actor"));
+       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Player", "Blocking","Enemy"));
        if(hit.collider == null) //if there is nothing in the player's way in the y-direction
        {
            //move object in x

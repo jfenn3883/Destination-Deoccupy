@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
    private float lastDash;
   private float lastDashTimer = 0.5f ;
   private bool isCharging = false;
-  protected int health = 1; //the player's health
+  protected int health = 6; //the player's health
   protected int damage = 1; //the amount of damage the enemy deals to the player
   private  Vector3 lastDirection; 
    private Vector3 moveDir ;
@@ -36,7 +37,6 @@ public class Player : MonoBehaviour
       }
        //Reset MoveDelta
        moveDelta = new Vector3(x,y,0);
-
        //Swap Sprite direction, when moving
        if(moveDelta.x > 0)
        {
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
         }
         if(Time.time - lastHit > lastHitTimer){ 
           lastHit = Time.time;
-          isHit = false; //set the enemy to be able to be hit
+          isHit = false; //set the player to be able to be hit
         } 
        if(Input.GetKeyDown(KeyCode.Space) && Time.time - lastDash > chargeCoolDown)
        {
@@ -118,7 +118,9 @@ public class Player : MonoBehaviour
     health -= damage; //damaging the enemy
     if(health <= 0){ //if the enemy is out of health
         Destroy(this.gameObject); //destroy the enemy 
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//reloads game
     }
+    
    }
    
 }
