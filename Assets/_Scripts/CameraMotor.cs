@@ -11,6 +11,7 @@ public class CameraMotor : MonoBehaviour
 
     private void LateUpdate()
     {
+       
         Vector3 delta = Vector3.zero;
         //check if within x boundary
         float deltaX = lookAt.position.x - transform.position.x;
@@ -42,5 +43,6 @@ public class CameraMotor : MonoBehaviour
             }
         }
         transform.position += new Vector3(delta.x, delta.y, 0);
+        
     }
 }

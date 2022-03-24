@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 366370153}
   - component: {fileID: 366370152}
   - component: {fileID: 366370155}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: firespirit_0
   m_TagString: Fighter
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 947922240}
   - component: {fileID: 947922239}
   - component: {fileID: 947922241}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: sword_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 1565735017}
   - component: {fileID: 1565735016}
   - component: {fileID: 1565735019}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: goblin_0
   m_TagString: Fighter
   m_Icon: {fileID: 0}

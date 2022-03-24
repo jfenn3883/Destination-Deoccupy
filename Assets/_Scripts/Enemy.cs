@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
            //move object in y
          transform.Translate(0,moveDelta.y * Time.deltaTime * speed,0);
        }
-        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Player"));
+        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Weapons"));
         // if enemy collides with player in y-direction
           if(hit.collider != null && !isHit){
            EnemyHit();
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
          transform.Translate(moveDelta.x * Time.deltaTime * speed,0,0);
        }
        //if enemy collides with player in x-direction
-         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Player"));
+         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Weapons"));
         // if enemy collides with player and the enemy is not currently hit
         if(hit.collider != null && !isHit){
             EnemyHit();
@@ -68,6 +68,7 @@ public class Enemy : MonoBehaviour
         //Checking if it has been long enough between hits
         //if the time between the last hit and the current time is greater than the cooldown
         if(Time.time - lastHit > lastHitTimer){ 
+          
           isHit = false; //set the enemy to be able to be hit
         }
 
