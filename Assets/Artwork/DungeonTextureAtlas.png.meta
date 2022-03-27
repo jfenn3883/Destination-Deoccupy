@@ -2935,7 +2935,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2943,6 +2943,69 @@ TextureImporter:
       bones: []
       spriteID: 7799659ab4db53680800000000000000
       internalID: -8775900166200321673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonTextureAtlas_0
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 8
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d22a9300af477df48bc09757b09f32d8
+      internalID: 1363329128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonTextureAtlas_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 11
+        width: 4
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38b18b856475d6f4993f1670db92ce0b
+      internalID: -821899303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dark_Swordsmen
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 174155bc26afe324e9cf097622df4ef5
+      internalID: 1597512907
       vertices: []
       indices: 
       edges: []
@@ -2989,12 +3052,13 @@ TextureImporter:
       grime_bot: 5017738458556700787
       floor_6: 5201237969506946998
       green_leak_top: -1590238840265045416
-      floor_0: 3745403098767717252
       chest_1_empty: -2535141986347977635
+      floor_0: 3745403098767717252
       red_banner: 3399864019309071141
       candle_2_top: -3583250079051903717
       blue_pipe_0: -5197122946799840818
       sword_3: 4617563631936802087
+      DungeonTextureAtlas_0: 1363329128
       candle_6_bot: 332370992950977364
       green_banner: 726500731672783044
       wall_top_2: -2020654211808825346
@@ -3033,6 +3097,7 @@ TextureImporter:
       floor_4: 8260865968740137126
       candle_1_top: -561864329894649317
       blue_spew_1_bot: -5658735376056430003
+      DungeonTextureAtlas_1: -821899303
       blue_banner: -6716987994028029845
       wall_trans_0: 7177710228864647033
       box_right_bot: 6534956770152042663
@@ -3049,6 +3114,7 @@ TextureImporter:
       player_1: -6670537300318210354
       pipe_mid: -3189471417409452629
       railing_1: 2900851839919401148
+      Dark_Swordsmen: 1597512907
       wall_2: 6325000984515036202
       pipe_empty_top: -3296236710529104420
       candle_8_bot: -5722319270077048809
