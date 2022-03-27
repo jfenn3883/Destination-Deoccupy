@@ -28,15 +28,7 @@ public class Player : MonoBehaviour
        boxCollider = GetComponent<BoxCollider2D>();
    }
    private void FixedUpdate()
-   {
-     
-     
-     if(!isCharging) {
-        x = Input.GetAxisRaw("Horizontal");
-        y = Input.GetAxisRaw("Vertical");
-      }
-       //Reset MoveDelta
-       moveDelta = new Vector3(x,y,0);
+   {       
        //Swap Sprite direction, when moving
        if(moveDelta.x > 0)
        {
@@ -91,7 +83,17 @@ public class Player : MonoBehaviour
        
      
    }
-  
+
+    public void Update()
+    {
+        Dictionary<string, int> inputs = GetInputs();
+
+        if (!isCharging)
+        {
+            moveDelta = new Vector3(inputs["x"], inputs["y"], 0);
+        }
+    }
+
     public void Charge()
    {
         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
@@ -122,5 +124,39 @@ public class Player : MonoBehaviour
     }
     
    }
+
+   public Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
+    {
+        Dictionary<string, int> inputs = new Dictionary<string, int>();
+        inputs.Add("x", 0);
+        inputs.Add("y", 0);
+
+        inputs.Add("space", 0);
+
+        inputs.Add("left", 0);
+        inputs.Add("right", 0);
+        inputs.Add("down", 0);
+        inputs.Add("up", 0);
+
+        inputs.Add("e", 0);
+        inputs.Add("q", 0);
+
+        if (Input.GetKey(KeyCode.A)) inputs["x"] -= 1;
+        if (Input.GetKey(KeyCode.D)) inputs["x"] += 1;
+        if (Input.GetKey(KeyCode.S)) inputs["y"] -= 1;
+        if (Input.GetKey(KeyCode.W)) inputs["y"] += 1;
+
+        if (Input.GetKey(KeyCode.Space)) inputs["space"] = 1;
+
+        if (Input.GetKey(KeyCode.LeftArrow)) inputs["left"] = 1;
+        if (Input.GetKey(KeyCode.RightArrow)) inputs["right"] = 1;
+        if (Input.GetKey(KeyCode.DownArrow)) inputs["down"] = 1;
+        if (Input.GetKey(KeyCode.UpArrow)) inputs["up"] = 1;
+
+        if (Input.GetKey(KeyCode.E)) inputs["e"] = 1;
+        if (Input.GetKey(KeyCode.Q)) inputs["q"] = 1;
+
+        return inputs;
+    } 
    
 }
