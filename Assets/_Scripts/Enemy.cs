@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     protected int health = 1; //the enemy's health
     protected int damage = 1; //the amount of damage the player deals to the enemy
     public float speed = 0.5f; //the enemy's speed
-    protected float radius = 200f; //within this distance the enemy will chase
+    protected float radius = 2f; //within this distance the enemy will chase
     protected float lastHit; //to store the time of the last hit
     protected float lastHitTimer = 1f; //the cooldown between hits from the hero to the enemy
     protected bool isHit = false; //a boolean to store if the enemy is currently hit

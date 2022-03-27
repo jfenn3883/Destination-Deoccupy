@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class DarkMage : Enemy
 {
+    public GameObject blastTemplate;
+    protected float lastBlast; //to store the time of the last hit
+    protected float lastBlastTimer = 1f; //the cooldown between hits from the hero to the enemy
+    protected bool isBlast = false;
     protected override void FixedUpdate()
     {
        //Reset MoveDelta
-       moveDelta = (-target.position + transform.position); //Setting the enemy to move toward the player
+       moveDelta = (-target.position + transform.position); //Setting the enemy to move away from the player
        if(moveDelta.magnitude > radius) moveDelta = new Vector3(0,0,0); //if the enemy is far from the player don't chase them 
        moveDelta = moveDelta.normalized; //normalize the vector 
 
@@ -51,7 +55,15 @@ public class DarkMage : Enemy
         //if the time between the last hit and the current time is greater than the cooldown
         if(Time.time - lastHit > lastHitTimer){ 
           
-          isHit = false; //set the enemy to be able to be hit    }
+          isHit = false; //set the enemy to be able to be hit
+        }
+        //Set the mage to shoot a blast
+        if(Time.time - lastBlast > lastBlastTimer){ 
+          shootBlast();
+        }
+        void shootBlast(){
+            GameObject blast = Instantiate(blastTemplate) as GameObject; //creating a pink pickup
+            blastTemplate.transform.position = new Vector3(0,0,0); //changing its' location to a random location in the box
         }
     } 
 }
