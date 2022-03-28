@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
         protected BoxCollider2D boxCollider; //for the enemy's box collider 
         protected Vector3 moveDelta; //the enemy's direction
         protected RaycastHit2D hit; //to know if the projectile has hit
-        public float speed = 0.5f; //the projectile's speed
+        public float speed = 2f; //the projectile's speed
   
     protected virtual void Start()
     {
