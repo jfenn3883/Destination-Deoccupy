@@ -67,10 +67,7 @@ public class Enemy : MonoBehaviour
         }
         //Checking if it has been long enough between hits
         //if the time between the last hit and the current time is greater than the cooldown
-        if(Time.time - lastHit > lastHitTimer){ 
-          
-          isHit = false; //set the enemy to be able to be hit
-        }
+        if(Time.time - lastHit > lastHitTimer){  isHit = false; /*set the enemy to be able to be hit*/}
 
    }
 protected virtual void EnemyHit(){
