@@ -17,19 +17,24 @@ public class Weapon : Collidable
    private SpriteRenderer SpriteRenderer;
 
    //Sword swing
+    private Animator anim;
     private float coolDown = 0.5f;
     private float lastSwing;
+    
 
    protected override void Start()
    {
        base.Start();
-       SpriteRenderer = GetComponent<SpriteRenderer>(); //related to old upgrade can be kept and implemented 
+       SpriteRenderer = GetComponent<SpriteRenderer>(); //related to old upgrade can be kept and implemented
+       anim = GetComponent<Animator>(); 
    }
    protected override void Update()
    {
        base.Update();
+       anim.Play("swordSwing");
+    
 
-       if(Input.GetKeyDown(KeyCode.Mouse0))
+       if(Input.GetKeyDown(KeyCode.Space)) //  Mouse0
        {
            if(Time.time - lastSwing > coolDown)
            {
@@ -56,10 +61,11 @@ public class Weapon : Collidable
          coll.SendMessage("ReceiveDamage",dmg); 
        }
    }
-   private void Swing()
+    private void Swing()
    {
-       
+    anim.SetTrigger("Swing");
    } 
+
 }
 
 }
