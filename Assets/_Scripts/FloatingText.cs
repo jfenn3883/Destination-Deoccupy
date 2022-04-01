@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FloatingText : MonoBehaviour
+public class FloatingText
 {
     //variables to activate, and time duration of text 
     public bool active;
@@ -12,7 +12,7 @@ public class FloatingText : MonoBehaviour
     public Vector3 motion;
     public float duration;
     public float lastShown;
-
+    
    // method to show text 
     public void Show()
     {
@@ -29,9 +29,9 @@ public class FloatingText : MonoBehaviour
 
     public void UpdateFLoatingTxt()
     {
-        if(!active)return;
+        if(!active) return;
         
-        if(Time.time - lastShown > duration)Hide(); // if text has been shown for long enough hide
+        if(Time.time - lastShown > duration) Hide(); // if text has been shown for long enough hide
 
         gamesObject.transform.position += motion * Time.deltaTime;
     }

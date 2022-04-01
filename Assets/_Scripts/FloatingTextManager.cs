@@ -11,6 +11,12 @@ public class FloatingTextManager : MonoBehaviour
 
   private List<FloatingText> floatingTexts = new List<FloatingText>();
 
+private void Update(){
+  for(int i = 0; i < floatingTexts.Count; i++){
+    floatingTexts[i].UpdateFLoatingTxt();
+  }
+  //txt.UpdateFLoatingTxt();
+}
 public void Show(string messege, int fontSize, Color colour, Vector3 position, Vector3 motion, float duration )
 {
     FloatingText floatingText = GetFloatingText();
@@ -30,7 +36,7 @@ public void Show(string messege, int fontSize, Color colour, Vector3 position, V
         txt = new FloatingText();
         txt.gamesObject = Instantiate(textPrefab);
         txt.gamesObject.transform.SetParent(textContainer.transform);
-        txt.txt = txt.gamesObject.GetComponents<Text>();
+        txt.txt = txt.gamesObject.GetComponent<Text>();
 
         floatingTexts.Add(txt);
     }
