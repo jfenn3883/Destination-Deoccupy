@@ -7046,8 +7046,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1168551765}
   - component: {fileID: 1168551764}
-  - component: {fileID: 1168551763}
   - component: {fileID: 1168551766}
+  - component: {fileID: 1168551767}
   m_Layer: 8
   m_Name: player_0
   m_TagString: Untagged
@@ -7055,18 +7055,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1168551763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168551762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 666bc5fe0a065904992fef4051e733c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &1168551764
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7148,7 +7136,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.010661602, y: 0.024877012}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7159,8 +7147,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.30926222, y: 0.43720105}
   m_EdgeRadius: 0
+--- !u!114 &1168551767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168551762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4571752f3051d3c4997e103ed6da7319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  coins: 0
+  speed: 1
+  damage: 20
+  lastTakeDmg: 0
+  lastAttack: 0
+  takeDmgCooldown: 2
+  attackCooldown: 1
 --- !u!1 &1382952774
 GameObject:
   m_ObjectHideFlags: 0
@@ -9340,7 +9348,7 @@ GameObject:
   - component: {fileID: 1847183019}
   - component: {fileID: 1847183021}
   - component: {fileID: 1847183020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12150,7 +12158,7 @@ GameObject:
   - component: {fileID: 1989519247}
   - component: {fileID: 1989519248}
   - component: {fileID: 1989519249}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sword_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12237,7 +12245,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003701903, y: 0.04072237}
+  m_Offset: {x: -0.011528939, y: 0.11179955}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -12248,7 +12256,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.07038389, y: 0.12855524}
+  m_Size: {x: 0.2836153, y: 0.49409506}
   m_EdgeRadius: 0
 --- !u!1 &1997583459
 GameObject:
