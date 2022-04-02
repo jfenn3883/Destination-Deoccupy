@@ -2,30 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class DarkMage : Enemy
 {
-  public Transform target;// the hero's transform for the enemy to chase
-    protected BoxCollider2D boxCollider; //for the enemy's box collider 
-    protected Vector3 moveDelta; //the enemy's direction
-    protected RaycastHit2D hit; //to know if the enemy has been hit
-    protected int health = 1; //the enemy's health
-    protected int damage = 1; //the amount of damage the player deals to the enemy
-    public float speed = 0.5f; //the enemy's speed
-    protected float radius = 2f; //within this distance the enemy will chase
-    protected float lastHit; //to store the time of the last hit
-    protected float lastHitTimer = 1f; //the cooldown between hits from the hero to the enemy
-    protected bool isHit = false; //a boolean to store if the enemy is currently hit
+    public GameObject blastTemplate;
+    protected float lastBlast; //to store the time of the last hit
+    protected float lastBlastTimer = 3f; //the cooldown between hits from the hero to the enemy
+    protected bool isBlast = true; //to know if the enemy is in blast mode
 
+    protected override void Start()
+    {
+        base.Start();
+        lastBlast = Time.time; //getting the enemies box collider 
+    }
+    protected override void FixedUpdate()
+    {
+      /*
+        if (isBlast)
+        {
+            if (Time.time - lastBlast > lastBlastTimer)
+            {
+                lastBlast = Time.time;
+                GameObject blast = Instantiate(blastTemplate, transform.position, Quaternion.identity);
+                blast.GetComponent<Projectile>().target = GameObject.Find("player_0").transform;
+                isBlast = false;
+            }
+        }   
+        */
 
-
-   protected virtual void Start()
-   {
-       boxCollider = GetComponent<BoxCollider2D>(); //getting the enemies box collider 
-   }
-   protected virtual void FixedUpdate()
-   {
        //Reset MoveDelta
-       moveDelta = (target.position - transform.position); //Setting the enemy to move toward the player
+       moveDelta = (-target.position + transform.position); //Setting the enemy to move away from the player
        if(moveDelta.magnitude > radius) moveDelta = new Vector3(0,0,0); //if the enemy is far from the player don't chase them 
        moveDelta = moveDelta.normalized; //normalize the vector 
 
@@ -67,15 +72,23 @@ public class Enemy : MonoBehaviour
         }
         //Checking if it has been long enough between hits
         //if the time between the last hit and the current time is greater than the cooldown
-        if(Time.time - lastHit > lastHitTimer){  isHit = false; /*set the enemy to be able to be hit*/}
-
-   }
-protected virtual void EnemyHit(){
-    isHit = true; //setting the boolean variable to show that the enemy has just been hit
-    lastHit = Time.time; //saving the time the last hit occured
-    health -= damage; //damaging the enemy
-    if(health <= 0){ //if the enemy is out of health
-        Destroy(this.gameObject); //destroy the enemy 
+        if(Time.time - lastHit > lastHitTimer){ 
+          
+          isHit = false; //set the enemy to be able to be hit
+        }
+        //Set the mage to shoot a blast
+        if(Time.time - lastBlast > lastBlastTimer){ shootBlast();}
     }
-}  
+        void shootBlast(){
+            lastBlast = Time.time; //setting the time of the last blast
+            GameObject blast = Instantiate(blastTemplate) as GameObject; //creating a blast
+            blast.transform.position = transform.position; //setting the blast to the mage's position
+            blast.transform.Translate(0,-1,0); //translating the blast to the right
+            //give the blast a target
+            blast.GetComponent<Projectile>().target = GameObject.Find("player_0").transform;
+            //give the blast a force toward the target 
+            blast.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,1) * blast.GetComponent<Projectile>().speed, ForceMode2D.Impulse);
+            //give the blast a force
+            //blast.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,1), ForceMode2D.Impulse);
+        }
 }

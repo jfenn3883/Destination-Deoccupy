@@ -5,9 +5,9 @@ using UnityEngine;
 public class Goblin : Enemy
 {
     // Start is called before the first frame update
-    protected override void Start()
+    protected override void FixedUpdate()
     {
-        base.Start();
+        base.FixedUpdate();
         health = 5; 
     }
 }

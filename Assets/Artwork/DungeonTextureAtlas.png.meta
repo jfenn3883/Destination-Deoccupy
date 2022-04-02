@@ -2956,7 +2956,7 @@ TextureImporter:
         width: 4
         height: 3
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2977,7 +2977,7 @@ TextureImporter:
         width: 4
         height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2998,7 +2998,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3006,6 +3006,27 @@ TextureImporter:
       bones: []
       spriteID: 174155bc26afe324e9cf097622df4ef5
       internalID: 1597512907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: darkMage
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c41f5c02c38f44a47ad1379123874352
+      internalID: 1110822057
       vertices: []
       indices: 
       edges: []
@@ -3052,8 +3073,8 @@ TextureImporter:
       grime_bot: 5017738458556700787
       floor_6: 5201237969506946998
       green_leak_top: -1590238840265045416
-      chest_1_empty: -2535141986347977635
       floor_0: 3745403098767717252
+      chest_1_empty: -2535141986347977635
       red_banner: 3399864019309071141
       candle_2_top: -3583250079051903717
       blue_pipe_0: -5197122946799840818
@@ -3120,6 +3141,7 @@ TextureImporter:
       candle_8_bot: -5722319270077048809
       blue_spew_0_left: -3930522528198474266
       wall_hole_0: 3765843471923248985
+      darkMage: 1110822057
       floor_8: 8189926598071197275
       box_right_top: -2910822737391615721
       floor_11: -1191756992728411339
