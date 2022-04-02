@@ -10,7 +10,7 @@ public abstract class Player_1 : MonoBehaviour
     public int coins;
     public float speed;
     public int damage; // if deal dmg gets taken out, take this out as well
-
+    public float experience; 
  // last occurrence
   public float lastTakeDmg;
   public float lastAttack; 
@@ -99,7 +99,25 @@ public abstract class Player_1 : MonoBehaviour
     protected virtual void dealDmg(Enemy enemy, int dmg) {
        // enemy.takeDmg(dmg);
     }
+    protected virtual void GetExperience(int xpAmount) {
+        if(experience < 50)
+        {
+            experience += xpAmount;
+        }
+    }
+    protected virtual void  Leveling()
+    {
+        int level = 1;
+        if(experience == 50)
+        {
+            
+          health += 5;
+          experience = 0;
+          level++;
+          //text display the levelup and increase in health "Level up gained 5 health points
 
+        }
+    }
     protected virtual bool checkAlive() {
       bool alive = true;
         if(health > 0)
