@@ -9,7 +9,7 @@ public class Goblin : Enemy
     {
         base.Start();
         health = 5; // set health to 5
-        GameManager.gameInstance.showText("hello lil boy",25,Color.black, new Vector3(0,0.3f,0),Vector3.up * 1, 2f);
+        GameManager.gameInstance.showText("hello lil boy",25,Color.black, new Vector3(1.15f, 0.9f, 0),Vector3.down * 20, 3f);
 
   }
 }
