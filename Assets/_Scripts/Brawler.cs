@@ -35,7 +35,7 @@ public class Brawler : Player_1
          isCharging = true; 
          lastCharge = Time.time;
          Charge(chargeSpeed, chargeDamage);
-       } else if(Time.time - lastCharge  < lastChargeTimer) {
+       } else if(inputs["space"] == 1 && Time.time - lastCharge  < lastChargeTimer) {
          Charge(chargeSpeed, chargeDamage);
        } else {
          isCharging = false;

@@ -7161,11 +7161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4571752f3051d3c4997e103ed6da7319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: -5747124542107903975, guid: 15215f4da54b7af4aa4db20b2cae9457, type: 3}
   health: 100
   coins: 0
   speed: 1
   damage: 20
+  lastTakeDmg: 0
+  lastAttack: 0
   takeDmgCooldown: 2
   attackCooldown: 1
 --- !u!1 &1382952774
