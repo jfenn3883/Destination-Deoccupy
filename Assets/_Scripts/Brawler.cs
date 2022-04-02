@@ -21,7 +21,11 @@ public class Brawler : Player_1
         
    }     
     protected override void Update() {
-        base.Update();   
+        base.Update();  
+        if (!isCharging)
+        {
+            moveDelta = new Vector3(inputs["x"], inputs["y"], 0);
+        } 
     }
     protected override void FixedUpdate() {
         base.FixedUpdate();

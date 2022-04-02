@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Player_1 : MonoBehaviour
 {
     // player attributes
-    public Sprite sprite;
     public int health;
     public int coins;
     public float speed;
@@ -27,7 +26,8 @@ public abstract class Player_1 : MonoBehaviour
     protected Enemy enemy;
     protected virtual void Start()
     {
-    
+        boxCollider = GetComponent<BoxCollider2D>();
+        inputs = GetInputs();
     }
 
     
@@ -41,6 +41,7 @@ public abstract class Player_1 : MonoBehaviour
     }
 
     protected virtual void move(float speed) {
+      
         //Swap Sprite direction, when moving
        if(moveDelta.x > 0)
        {
