@@ -8,6 +8,8 @@ public class Goblin : Enemy
     protected override void Start()
     {
         base.Start();
-        health = 5; 
-    }
+        health = 5; // set health to 5
+        GameManager.gameInstance.showText("hello lil boy",25,Color.black, new Vector3(1.15f, 0.9f, 0),Vector3.down * 20, 3f);
+
+  }
 }

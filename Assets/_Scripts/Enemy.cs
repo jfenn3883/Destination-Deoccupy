@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
    protected virtual void Start()
    {
        boxCollider = GetComponent<BoxCollider2D>(); //getting the enemies box collider 
-   }
+    }
    protected virtual void FixedUpdate()
    {
        //Reset MoveDelta
