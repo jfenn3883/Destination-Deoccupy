@@ -21,8 +21,10 @@ public class GameManager : MonoBehaviour
     } 
 
     //Resources, keep track of player, their weapons, and xp 
-    public List<Sprite> playerSprites;
-    public List<Sprite> weaponSprite;
+    public List<Sprite> playerSprites; //List of player sprites
+    public Sprite playerSprite; //current player sprite
+    public List<Sprite> weaponSprites; //List of weapon sprites
+    public Sprite weaponSprite; //current weapon sprite
     public List<Sprite> weaponPrices;
     public List<Sprite> xpTable;
 
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     //logic
     public int coins;
     public int xpPoints;
+    public int health;
 
     //save and load the game for progression
     public void SaveGame()
