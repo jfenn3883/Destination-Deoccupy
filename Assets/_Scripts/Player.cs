@@ -3,48 +3,69 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public abstract class Player_1 : MonoBehaviour
 {
-  float x;
-  float y;
-  private BoxCollider2D boxCollider;
-  private Vector3 moveDelta;
-  private RaycastHit2D hit;
-  
-  private float chargeCoolDown = 2f; // set as 2 seonds for development, needs to be set as 20 seconds for actual gameplay
-   private float lastDash;
-  private float lastDashTimer = 0.5f ;
-  private bool isCharging = false;
-  protected int health = 6; //the player's health
-  protected int damage = 1; //the amount of damage the enemy deals to the player
-  private  Vector3 lastDirection; 
-   private Vector3 moveDir ;
-    protected float lastHit; 
-      protected float lastHitTimer = 1f;
-      protected bool isHit = false;
+    // player attributes
+    public int health;
+    public int coins;
+    public float speed;
+    public int damage; // if deal dmg gets taken out, take this out as well
+    public float experience; 
+ // last occurrence
+  public float lastTakeDmg;
+  public float lastAttack; 
+    // cooldowns
+    public float takeDmgCooldown = 1f;
+    public float attackCooldown = 1f;
 
-   private void Start()
-   {
-       boxCollider = GetComponent<BoxCollider2D>();
-   }
-   private void FixedUpdate()
-   {       
-       //Swap Sprite direction, when moving
+    // private components
+    protected BoxCollider2D boxCollider;
+    
+    // private vars
+    protected Vector3 moveDelta;
+    protected RaycastHit2D hit;
+    protected Dictionary<string, int> inputs;
+    protected Vector3 moveDir ;
+    protected bool isHit = false;
+    protected Enemy enemy; // if deal dmg gets taken out, take this out as well
+
+    protected virtual void Start()
+    {
+        boxCollider = GetComponent<BoxCollider2D>();
+        inputs = GetInputs();
+    }
+
+    
+    protected virtual void Update()
+    {
+        inputs = GetInputs();
+    }
+
+    protected virtual void FixedUpdate() {
+
+    }
+      
+
+
+    protected virtual void move(float speed) {
+      
+        //Swap Sprite direction, when moving
        if(moveDelta.x > 0)
        {
            transform.localScale = Vector3.one;
        }
        else if( moveDelta.x < 0)
        {
-            transform.localScale = new Vector3(-1,1,0);
+            transform.localScale = new Vector3(-1,1,0);// double check
        }
-       moveDir = new Vector3(moveDelta.x,moveDelta.y, 0);
+
+       moveDir = new Vector3(moveDelta.x,moveDelta.y, 0).normalized;
 
        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Enemy", "Blocking"));
        if(hit.collider == null)
        {
            //move object in y
-         transform.Translate(0,moveDelta.y * Time.deltaTime,0);
+         transform.Translate(0,moveDelta.y * Time.deltaTime*speed,0);
        
        }
        
@@ -52,80 +73,82 @@ public class Player : MonoBehaviour
        if(hit.collider == null)
        {
            //move object in x
-         transform.Translate(moveDelta.x * Time.deltaTime,0,0);
+         transform.Translate(moveDelta.x * Time.deltaTime*speed,0,0);
        }
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Enemy"));
-        // if enemy collides with player in y-direction
-          if(hit.collider != null && !isHit){
-          PlayerGetHit();
-        }
-         //if enemy collides with player in x-direction
-         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Enemy"));
-        // if enemy collides with player in x direction 
-        if(hit.collider != null && !isHit){
-            PlayerGetHit();
-        }
-        if(Time.time - lastHit > lastHitTimer){ 
-          lastHit = Time.time;
-          isHit = false; //set the player to be able to be hit
-        } 
-       if(Input.GetKeyDown(KeyCode.Space) && Time.time - lastDash > chargeCoolDown)
-       {
-         isCharging = true; 
-         lastDash = Time.time;
-         Charge();
-       } else if(Time.time - lastDash  < lastDashTimer) {
-         Charge();
-       } else {
-         isCharging = false;
-       }
-
-       
-     
-   }
-
-    public void Update()
-    {
-        Dictionary<string, int> inputs = GetInputs();
-
-        if (!isCharging)
-        {
-            moveDelta = new Vector3(inputs["x"], inputs["y"], 0);
-        }
-    }
-
-    public void Charge()
-   {
-        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-       if(hit.collider == null &&  isCharging == true)
-       {
-           //move object in y
-         transform.Translate(0,moveDelta.y * Time.deltaTime,0);
-       
-       }
-       
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-       if(hit.collider == null && isCharging == true)
-       {
-           //move object in x
-         transform.Translate(moveDelta.x * Time.deltaTime,0,0);
-       
-       } 
-    
       
-   }
-   public void PlayerGetHit(){
-    isHit = true; //setting the boolean variable to show that the enemy has just been hit
-    lastHit = Time.time; //saving the time the last hit occured
-    health -= damage; //damaging the enemy
-    if(health <= 0){ //if the enemy is out of health
-        Destroy(this.gameObject); //destroy the enemy 
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//reloads game
     }
-    
-   }
 
-   public Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
+    protected virtual void takeDmg(int dmg) {
+        //***if statement missing collision with enemny or projectile ***
+       if(checkAlive()) 
+       {
+            if(Time.time - lastTakeDmg > takeDmgCooldown) // check last time taken damage against the cooldown time 
+            {
+                lastTakeDmg = Time.time; //set new last damage timer 
+                this.health -= dmg; // decrease health;
+            }
+       }
+       else
+       {
+           return;
+       }
+       
+    }
+
+    // probably going to go in weapons
+    protected virtual void dealDmg(Enemy enemy, int dmg) {
+       // enemy.takeDmg(dmg);
+    }
+    protected virtual void GetExperience(int xpAmount) {
+        if(experience < 50)
+        {
+            experience += xpAmount;
+        }
+    }
+    protected virtual void  Leveling()
+    {
+        int level = 1;
+        if(experience == 50)
+        {
+            
+          health += 5;
+          experience = 0;
+          level++;
+          //text display the levelup and increase in health "Level up gained 5 health points
+
+        }
+    }
+    protected virtual bool checkAlive() {
+      bool alive = true;
+        if(health > 0)
+        {
+            alive = true; 
+        }
+        else if(health <= 0)
+        {
+            alive = false;
+            Destroy(this.gameObject); //destroy the player
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//reloads game ***needs to be changed****
+        }
+        return alive; 
+        
+    }
+    protected virtual void GetCoins(int coinAmount) {
+        coins += coinAmount;
+    }
+    protected virtual void SpendCoins(int price) {
+        if(coins >= price && coins > 0)
+        {
+            coins -= price;
+        }
+        else 
+        {
+            return; ///need to use floating text to display messeage!
+        }
+       
+    }
+
+    protected virtual Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
     {
         Dictionary<string, int> inputs = new Dictionary<string, int>();
         inputs.Add("x", 0);
@@ -158,5 +181,4 @@ public class Player : MonoBehaviour
 
         return inputs;
     } 
-   
 }
