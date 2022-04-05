@@ -3,129 +3,87 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
-  float x;
-  float y;
-  private BoxCollider2D boxCollider;
-  private Vector3 moveDelta;
-  private RaycastHit2D hit;
-  
-  private float chargeCoolDown = 2f; // set as 2 seonds for development, needs to be set as 20 seconds for actual gameplay
-   private float lastDash;
-  private float lastDashTimer = 0.5f ;
-  private bool isCharging = false;
-  protected int health = 6; //the player's health
-  protected int damage = 1; //the amount of damage the enemy deals to the player
-  private  Vector3 lastDirection; 
-   private Vector3 moveDir ;
-    protected float lastHit; 
-      protected float lastHitTimer = 1f;
-      protected bool isHit = false;
+    // player attributes
+    public int health = 10;
+    public int coins = 0;
+    public float speed = 1;
+    public float experience = 0;
+    public Weapon weapon;
 
-   private void Start()
-   {
-       boxCollider = GetComponent<BoxCollider2D>();
-   }
-   private void FixedUpdate()
-   {       
+    // cooldowns
+    public float damageCooldown = 1f;
+
+    // next occurrence
+    protected float nextDamage;
+
+    // private components
+    protected BoxCollider2D boxCollider;
+    protected Rigidbody2D body;
+    
+    // private vars
+    protected Vector2 moveDelta;
+    protected RaycastHit2D hit;
+    protected Dictionary<string, int> inputs;
+
+    protected virtual void Start()
+    {
+        boxCollider = GetComponent<BoxCollider2D>();
+        body = GetComponent<Rigidbody2D>();
+        inputs = GetInputs();
+    }
+
+    protected virtual void Update()
+    {
+        inputs = GetInputs();
+        moveDelta = new Vector2(inputs["x"], inputs["y"]);
+    }
+
+    protected virtual void FixedUpdate() {
+        move();
+
+        if (inputs["right"] != 0) weapon.attack(0);
+        else if (inputs["up"] != 0) weapon.attack(1);
+        else if (inputs["left"] != 0) weapon.attack(2);
+        else if (inputs["down"] != 0) weapon.attack(3);
+    }
+      
+    protected virtual void move() {
        //Swap Sprite direction, when moving
        if(moveDelta.x > 0)
        {
-           transform.localScale = Vector3.one;
+           transform.localScale = Vector2.one;
        }
        else if( moveDelta.x < 0)
        {
-            transform.localScale = new Vector3(-1,1,0);
-       }
-       moveDir = new Vector3(moveDelta.x,moveDelta.y, 0);
-
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Enemy", "Blocking"));
-       if(hit.collider == null)
-       {
-           //move object in y
-         transform.Translate(0,moveDelta.y * Time.deltaTime,0);
-       
-       }
-       
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Enemy", "Blocking"));
-       if(hit.collider == null)
-       {
-           //move object in x
-         transform.Translate(moveDelta.x * Time.deltaTime,0,0);
-       }
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Enemy"));
-        // if enemy collides with player in y-direction
-          if(hit.collider != null && !isHit){
-          PlayerGetHit();
-        }
-         //if enemy collides with player in x-direction
-         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Enemy"));
-        // if enemy collides with player in x direction 
-        if(hit.collider != null && !isHit){
-            PlayerGetHit();
-        }
-        if(Time.time - lastHit > lastHitTimer){ 
-          lastHit = Time.time;
-          isHit = false; //set the player to be able to be hit
-        } 
-       if(Input.GetKeyDown(KeyCode.Space) && Time.time - lastDash > chargeCoolDown)
-       {
-         isCharging = true; 
-         lastDash = Time.time;
-         Charge();
-       } else if(Time.time - lastDash  < lastDashTimer) {
-         Charge();
-       } else {
-         isCharging = false;
+            transform.localScale = new Vector2(-1, 1);// double check
        }
 
-       
-     
-   }
+        hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.magnitude * Time.deltaTime * speed), LayerMask.GetMask("Enemy", "Blocking"));
+        if (hit.collider == null) transform.Translate(moveDelta * Time.deltaTime * speed);
+    }
 
-    public void Update()
+    public void damage(int damage)
     {
-        Dictionary<string, int> inputs = GetInputs();
-
-        if (!isCharging)
+        if(Time.time > nextDamage)
         {
-            moveDelta = new Vector3(inputs["x"], inputs["y"], 0);
+            nextDamage = Time.time + damageCooldown;
+            health -= damage;
+            checkHealth();
         }
     }
 
-    public void Charge()
-   {
-        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-       if(hit.collider == null &&  isCharging == true)
-       {
-           //move object in y
-         transform.Translate(0,moveDelta.y * Time.deltaTime,0);
-       
-       }
-       
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-       if(hit.collider == null && isCharging == true)
-       {
-           //move object in x
-         transform.Translate(moveDelta.x * Time.deltaTime,0,0);
-       
-       } 
-    
-      
-   }
-   public void PlayerGetHit(){
-    isHit = true; //setting the boolean variable to show that the enemy has just been hit
-    lastHit = Time.time; //saving the time the last hit occured
-    health -= damage; //damaging the enemy
-    if(health <= 0){ //if the enemy is out of health
-        Destroy(this.gameObject); //destroy the enemy 
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//reloads game
+    protected void checkHealth() // TODO: Implement the stage reloading
+    {
+        if(health <= 0)
+        {
+            
+            Destroy(this.gameObject);
+        }
     }
-    
-   }
 
-   public Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
+    protected virtual Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
     {
         Dictionary<string, int> inputs = new Dictionary<string, int>();
         inputs.Add("x", 0);
@@ -157,6 +115,5 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Q)) inputs["q"] = 1;
 
         return inputs;
-    } 
-   
+    }
 }
