@@ -29,17 +29,12 @@ public class Weapon : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        // this doesnt work
         hits.Clear();
+        Physics2D.OverlapCollider(box, contact, hits);
 
-        Physics2D.GetContacts(box, contact, hits);
-
-        if (hits.Count != 0)
+        foreach(Collider2D hit in hits)
         {
-            foreach (Collider2D coll in hits)
-            {
-                if (coll.gameObject.tag == "Enemy" && Time.time < nextAttack - (attackCooldown - animationDuration)) coll.gameObject.GetComponent<Enemy>().damage(attackDamage);
-            }
+            if (hit.gameObject.CompareTag("Enemy")) hit.gameObject.GetComponent<Enemy>().damage(attackDamage);
         }
     }
 
@@ -63,6 +58,4 @@ public class Weapon : MonoBehaviour
         }
 
     }
-
-
 }
