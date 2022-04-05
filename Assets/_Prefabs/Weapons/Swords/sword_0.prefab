@@ -98,22 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe3f6518f69d6340a1a0dd6c21d701b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  damage: 1
-  pushForce: 0
+  sprite: {fileID: 4423585108976943793, guid: 15215f4da54b7af4aa4db20b2cae9457, type: 3}
+  attackDamage: 1
+  pushForce: 0.5
+  attackCooldown: 1
+  animationDuration: 1
 --- !u!61 &173020725561049347
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DarkMage : Enemy
 {
-    public GameObject blastTemplate;
+    /*public GameObject blastTemplate;
     protected float lastBlast; //to store the time of the last hit
     protected float lastBlastTimer = 3f; //the cooldown between hits from the hero to the enemy
     protected bool isBlast = true; //to know if the enemy is in blast mode
@@ -16,7 +16,7 @@ public class DarkMage : Enemy
     }
     protected override void FixedUpdate()
     {
-      /*
+      *//*
         if (isBlast)
         {
             if (Time.time - lastBlast > lastBlastTimer)
@@ -27,7 +27,7 @@ public class DarkMage : Enemy
                 isBlast = false;
             }
         }   
-        */
+        *//*
 
        //Reset MoveDelta
        moveDelta = (-target.position + transform.position); //Setting the enemy to move away from the player
@@ -90,5 +90,5 @@ public class DarkMage : Enemy
             blast.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,1) * blast.GetComponent<Projectile>().speed, ForceMode2D.Impulse);
             //give the blast a force
             //blast.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,1), ForceMode2D.Impulse);
-        }
+        }*/
 }

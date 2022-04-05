@@ -2,53 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : Collidable  
+public class Weapon : MonoBehaviour 
 {
+    protected BoxCollider2D box;
+    protected SpriteRenderer renderer;
+    public Sprite sprite;
+
     //Damage and knockback
-    public int damage;
-    public float pushForce;
+    public int attackDamage = 1;
+    public float pushForce = 1;
 
     //Sword swing
-    private float coolDown;
-    private float lastSwing;
+    public float attackCooldown = 1f;
+    protected float nextAttack;
+    public float animationDuration; // must always be less than attack cooldown
 
-   protected override void Start()
-   {
-       base.Start();
-   }
-   protected override void Update()
-   {
-       base.Update();
+    // private vars
+    protected List<RaycastHit2D> hits;
 
-       if(Input.GetKeyDown(KeyCode.Mouse0))
-       {
-           if(Time.time - lastSwing > coolDown)
-           {
-               lastSwing = Time.time;
-               Swing();
-           }
-       }
-   }
-   protected override void onCollide(Collider2D coll)
-   {
-       if(coll.tag == "Fighter")
-       {
-           if(coll.name == "Player") 
-            return;
-            
+    protected void Start()
+    {
+        box = GetComponent<BoxCollider2D>();
+        renderer = GetComponent<SpriteRenderer>();
+        renderer.sprite = sprite;
+        hits = new List<RaycastHit2D>();
+    }
 
-            Damage dmg = new Damage
-            {
-               damageAmount = damage,
-                Origin = transform.position,
-                pushForce = pushForce
-            };
+    protected void FixedUpdate()
+    {
+        foreach(RaycastHit2D raycast in hits)
+        {
+            if (raycast.collider.gameObject.tag == "Enemy" && Time.time < nextAttack - (attackCooldown - animationDuration)) raycast.collider.gameObject.GetComponent<Enemy>().damage(attackDamage);
+        }
+    }
 
-            coll.SendMessage("ReceiveDamage",dmg); 
-       }
-   }
-   private void Swing()
+    public void attack(int dir)
    {
+
+       if(Time.time > nextAttack)
+        {
+            // attack code goes here
+            nextAttack = Time.time + attackCooldown;
+        }
        
    } 
+
+
 }

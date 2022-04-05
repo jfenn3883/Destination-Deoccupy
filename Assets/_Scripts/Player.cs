@@ -6,18 +6,17 @@ using UnityEngine.SceneManagement;
 public abstract class Player : MonoBehaviour
 {
     // player attributes
-    public int health;
-    public int coins;
-    public float speed;
-    public float experience;
+    public int health = 10;
+    public int coins = 0;
+    public float speed = 1;
+    public float experience = 0;
     public Weapon weapon;
 
-    // last occurrence
-    public float lastTakeDmg;
-    public float lastAttack; 
     // cooldowns
-    public float takeDmgCooldown = 1f;
-    public float attackCooldown = 1f;
+    public float damageCooldown = 1f;
+
+    // next occurrence
+    protected float nextDamage;
 
     // private components
     protected BoxCollider2D boxCollider;
@@ -27,9 +26,6 @@ public abstract class Player : MonoBehaviour
     protected Vector2 moveDelta;
     protected RaycastHit2D hit;
     protected Dictionary<string, int> inputs;
-    protected bool isHit = false;
-
-    protected Vector3 lastPos;
 
     protected virtual void Start()
     {
@@ -38,7 +34,6 @@ public abstract class Player : MonoBehaviour
         inputs = GetInputs();
     }
 
-    
     protected virtual void Update()
     {
         inputs = GetInputs();
@@ -47,11 +42,14 @@ public abstract class Player : MonoBehaviour
 
     protected virtual void FixedUpdate() {
         move();
+
+        if (inputs["right"] != 0) weapon.attack(0);
+        else if (inputs["up"] != 0) weapon.attack(1);
+        else if (inputs["left"] != 0) weapon.attack(2);
+        else if (inputs["down"] != 0) weapon.attack(3);
     }
       
-
     protected virtual void move() {
-      
        //Swap Sprite direction, when moving
        if(moveDelta.x > 0)
        {
@@ -63,12 +61,26 @@ public abstract class Player : MonoBehaviour
        }
 
         hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.magnitude * Time.deltaTime * speed), LayerMask.GetMask("Enemy", "Blocking"));
-        if (hit.collider == null)
+        if (hit.collider == null) transform.Translate(moveDelta * Time.deltaTime * speed);
+    }
+
+    public void damage(int damage)
+    {
+        if(Time.time > nextDamage)
         {
-            transform.Translate(moveDelta * Time.deltaTime * speed);
+            nextDamage = Time.time + damageCooldown;
+            health -= damage;
+            checkHealth();
         }
+    }
 
-
+    protected void checkHealth() // TODO: Implement the stage reloading
+    {
+        if(health <= 0)
+        {
+            
+            Destroy(this.gameObject);
+        }
     }
 
     protected virtual Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
