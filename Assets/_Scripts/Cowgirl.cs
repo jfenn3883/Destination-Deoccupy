@@ -37,6 +37,8 @@ public class Cowgirl : Player
         else if (inputs["up"] != 0) shootGun(1);
         else if (inputs["left"] != 0) shootGun(2);
         else if (inputs["down"] != 0) shootGun(3);
+
+        if (isReloading && Time.time > nextShot) isReloading = false; 
     }
 
     protected override void move()
@@ -65,7 +67,6 @@ public class Cowgirl : Player
     {
         if(Time.time > nextShot && loaded > 0)
         {
-            isReloading = false;
             fireGun(dir); // dir math
             nextShot = Time.time + shotCooldown;
             loaded--;
@@ -75,23 +76,29 @@ public class Cowgirl : Player
 
     protected void reloadGun()
     {
-        isReloading = true;
         nextShot = Time.time + reloadCooldown;
+        isReloading = true;
         loaded = bullets;
     }
 
     protected void fireGun(int dir)
     {
-        if(dir == 0 || dir == 2) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(moveDelta.x, 0), contact, raycast, Mathf.Infinity);
+        raycast.Clear();
+        
+        if (dir == 0) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(1, 0), contact, raycast, Mathf.Infinity);
         else if(dir == 1) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(0, 1), contact, raycast, Mathf.Infinity);
+        else if (dir == 2) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(-1, 0), contact, raycast, Mathf.Infinity);
         else if (dir == 3) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(0, -1), contact, raycast, Mathf.Infinity);
 
-        foreach(RaycastHit2D hit in raycast)
+        if (raycast.Count != 0)
         {
-            if (hit.collider == null) continue;
-            hit.collider.gameObject.GetComponent<Enemy>().damage(gunDamage);
+            foreach (RaycastHit2D hit in raycast)
+            {
+                if (hit.collider != null) hit.collider.gameObject.GetComponent<Enemy>().damage(gunDamage);
+            }
         }
 
-        raycast = new List<RaycastHit2D>();
+        
+        
     }
 }

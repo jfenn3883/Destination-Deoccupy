@@ -17,19 +17,28 @@ public class Weapon : MonoBehaviour
     public float animationDuration; // must always be less than attack cooldown
 
     // private vars
-    protected List<RaycastHit2D> hits = new List<RaycastHit2D>();
+    protected List<Collider2D> hits = new List<Collider2D>();
+    protected ContactFilter2D contact = new ContactFilter2D();
 
     protected void Start()
     {
         box = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+        contact.layerMask = LayerMask.GetMask("Enemy");
     }
 
     protected void FixedUpdate()
     {
-        foreach (RaycastHit2D raycast in hits)
+        hits.Clear();
+
+        Physics2D.GetContacts(box, contact, hits);
+
+        if (hits.Count != 0)
         {
-            if (raycast.collider.gameObject.tag == "Enemy" && Time.time < nextAttack - (attackCooldown - animationDuration)) raycast.collider.gameObject.GetComponent<Enemy>().damage(attackDamage);
+            foreach (Collider2D coll in hits)
+            {
+                if (coll.gameObject.tag == "Enemy" && Time.time < nextAttack - (attackCooldown - animationDuration)) coll.gameObject.GetComponent<Enemy>().damage(attackDamage);
+            }
         }
     }
 
