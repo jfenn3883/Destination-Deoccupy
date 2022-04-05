@@ -62,7 +62,7 @@ public class Brawler : Player
         {
             if (hit.collider.gameObject.tag == "Enemy") hit.collider.gameObject.GetComponent<Enemy>().damage(weapon.attackDamage * chargeMultiplier);
             hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.magnitude * Time.deltaTime * speed), LayerMask.GetMask("Enemy", "Blocking"));
-            if (hit.collider == null) transform.Translate(moveDelta * Time.deltaTime * speed);
+            if (hit.collider == null) transform.Translate(moveDelta * Time.deltaTime * speed * 2);
             if (hit.collider.gameObject.tag == "Enemy") hit.collider.gameObject.GetComponent<Enemy>().damage(weapon.attackDamage * chargeMultiplier);
         }
     }

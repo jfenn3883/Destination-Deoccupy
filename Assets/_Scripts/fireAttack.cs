@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class fireAttack : MonoBehaviour
 {
-    protected BoxCollider2D boxCollider;
+    protected BoxCollider2D box;
 
     protected List<Collider2D> hits = new List<Collider2D>();
     protected ContactFilter2D contact = new ContactFilter2D();
@@ -14,9 +14,18 @@ public class fireAttack : MonoBehaviour
 
     protected void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        box = GetComponent<BoxCollider2D>();
         contact.layerMask = LayerMask.GetMask("Enemy");
     }
 
-    
+    protected void FixedUpdate()
+    {
+        hits.Clear();
+        Physics2D.OverlapCollider(box, contact, hits);
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.gameObject.CompareTag("Enemy")) hit.gameObject.GetComponent<Enemy>().damage(fireDamage);
+        }
+    }
 }
