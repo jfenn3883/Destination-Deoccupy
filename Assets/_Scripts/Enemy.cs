@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour
 
     protected void checkHealth()
     {
+        // drop rewards
         if (health <= 0) Destroy(this.gameObject);
     }
 
