@@ -90,11 +90,12 @@ public class Cowgirl : Player
         else if (dir == 2) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(-1, 0), contact, raycast, Mathf.Infinity);
         else if (dir == 3) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(0, -1), contact, raycast, Mathf.Infinity);
 
+        
         if (raycast.Count != 0)
         {
             foreach (RaycastHit2D hit in raycast)
             {
-                if (hit.collider != null) hit.collider.gameObject.GetComponent<Enemy>().damage(gunDamage);
+                if (hit.collider != null && hit.collider.gameObject.tag == "Enemy") hit.collider.gameObject.GetComponent<Enemy>().damage(gunDamage);
             }
         }
 
