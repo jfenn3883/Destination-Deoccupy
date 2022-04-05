@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public List<Sprite> xpTable;
 
     //References
-    public Player_0 player;
+    public Player player;
     
 
     //logic
