@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuAnimation : MonoBehaviour
+public class ShopAnimation : MonoBehaviour
 {
     public Animator anim; // Animator component
     public int showing = 0; // Is the menu showing?
@@ -16,11 +16,12 @@ public class MenuAnimation : MonoBehaviour
     void Update()
     {
         //if the player presses e then the animation will play
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            if(showing == 0) anim.Play("menu_showing"); showing = 1;
-            if(showing == 1) anim.Play("menu_hidden"); showing = 0;
+            if(showing == 0) anim.Play("shop_showing"); showing = 1;
+            if(showing == 1) anim.Play("shop_hidden"); showing = 0;
         }
         
     }
 }
+
