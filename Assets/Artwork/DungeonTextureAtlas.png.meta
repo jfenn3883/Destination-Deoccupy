@@ -1023,8 +1023,8 @@ TextureImporter:
         y: 225
         width: 10
         height: 21
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.14383443}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3073,8 +3073,8 @@ TextureImporter:
       grime_bot: 5017738458556700787
       floor_6: 5201237969506946998
       green_leak_top: -1590238840265045416
-      chest_1_empty: -2535141986347977635
       floor_0: 3745403098767717252
+      chest_1_empty: -2535141986347977635
       red_banner: 3399864019309071141
       candle_2_top: -3583250079051903717
       blue_pipe_0: -5197122946799840818

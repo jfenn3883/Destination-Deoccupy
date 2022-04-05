@@ -38,15 +38,15 @@ public abstract class Player : MonoBehaviour
     {
         inputs = GetInputs();
         moveDelta = new Vector2(inputs["x"], inputs["y"]);
-    }
-
-    protected virtual void FixedUpdate() {
-        move();
 
         if (inputs["right"] != 0) weapon.attack(0);
         else if (inputs["up"] != 0) weapon.attack(1);
         else if (inputs["left"] != 0) weapon.attack(2);
         else if (inputs["down"] != 0) weapon.attack(3);
+    }
+
+    protected virtual void FixedUpdate() {
+        move();
     }
       
     protected virtual void move() {
