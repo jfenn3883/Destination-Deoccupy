@@ -7,7 +7,7 @@ public class Brawler : Player
     // Charge Variables
     public float chargeCooldown = 3f;
     public float chargeDuration = 2f;
-    public int chargeMultiplier = 3;
+    public int chargeMultiplier = 2;
     private float nextCharge;
     private bool isCharging;
 
@@ -65,6 +65,14 @@ public class Brawler : Player
             if (hit.collider == null) transform.Translate(moveDelta * Time.deltaTime * speed * 2);
             if (hit.collider.gameObject.tag == "Enemy") hit.collider.gameObject.GetComponent<Enemy>().damage(weapon.attackDamage * chargeMultiplier);
         }
+    }
+
+    protected override void levelUp()
+    {
+        // health += 3;
+        // chargeCooldown -= 1f;
+        // chargeMultiplier += 1;
+        // chargeDuration += .35f;
     }
 
 }

@@ -6,7 +6,7 @@ public class Mage : Player
 {
     protected bool isFire = true;
     public float attackCooldown = 1.5f;
-    public float attackDistance = 3f;
+    public float attackDistance = 2f;
     protected float nextAttack;
 
     public GameObject fire;
@@ -93,5 +93,12 @@ public class Mage : Player
                 if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy")) hit.collider.gameObject.GetComponent<Enemy>().slow();
             }
         }
+    }
+
+    protected override void levelUp()
+    {
+        // health += 2;
+        // attackCooldown -= .25f;
+        // speed += .1f
     }
 }

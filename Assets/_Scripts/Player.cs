@@ -9,7 +9,7 @@ public abstract class Player : MonoBehaviour
     public int health = 10;
     public int coins = 0;
     public float speed = 1;
-    public float experience = 0;
+    public int experience = 0;
     public Weapon weapon;
 
     // cooldowns
@@ -92,6 +92,17 @@ public abstract class Player : MonoBehaviour
         }
         return false;
     }
+
+    public void getExp(int exp)
+    {
+        experience += exp;
+        if (experience > 50) {
+            experience -= 50;
+            levelUp();
+         }
+    }
+
+    protected abstract void levelUp();
 
     protected virtual Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
     {

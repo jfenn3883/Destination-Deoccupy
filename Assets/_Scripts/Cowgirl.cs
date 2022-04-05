@@ -130,4 +130,11 @@ public class Cowgirl : Player
         float angle = 360 / rollDuration;
         transform.Rotate(new Vector3(0, 0, -moveDelta.x), angle * Time.deltaTime);
     }
+
+    protected override void levelUp()
+    {
+        // health += 2;
+        // reloadCooldown -= .65f;
+        // shotCooldown -= .15f;
+    }
 }
