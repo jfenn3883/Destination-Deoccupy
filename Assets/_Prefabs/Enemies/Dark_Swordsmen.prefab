@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 66935651099984808}
   m_Layer: 10
   m_Name: Dark_Swordsmen
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  health: 3
+  health: 1
   attackDamage: 1
-  speed: 0.75
-  radius: 5
+  speed: 0.5
+  radius: 4.5
   damageCooldown: 1
