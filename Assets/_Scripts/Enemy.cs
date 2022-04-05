@@ -8,8 +8,9 @@ public class Enemy : MonoBehaviour
     public Transform target; // the hero's transform for the enemy to chase
     public int health = 1; //the enemy's health
     public int attackDamage = 1; //the amount of damage the player deals to the enemy
-    public float speed = 0.5f; //the enemy's speed
+    public float topSpeed = 0.75f; //the enemy's speed
     public float radius = 4f; //within this distance the enemy will chase
+    public float speed;
 
     // private vars
     protected BoxCollider2D boxCollider; //for the enemy's box collider 
@@ -21,12 +22,23 @@ public class Enemy : MonoBehaviour
     public int damageCooldown = 1;
     protected float nextDamage;
 
+    // mage
+    protected float slowed = 0;
 
 
    protected virtual void Start()
    {
        boxCollider = GetComponent<BoxCollider2D>(); //getting the enemies box collider 
+        speed = topSpeed;
    }
+
+    protected virtual void Update()
+    {
+        if(speed < topSpeed)
+        {
+            speed += .1f;
+        }
+    }
 
    protected virtual void FixedUpdate()
    {
@@ -70,5 +82,8 @@ public class Enemy : MonoBehaviour
         if (health <= 0) Destroy(this.gameObject);
     }
 
-
+    public void slow()
+    {
+        slowed = speed / 2;
+    }
 }

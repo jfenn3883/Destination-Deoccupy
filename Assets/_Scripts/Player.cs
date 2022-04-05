@@ -83,15 +83,14 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    public void exp(int exp)
+    public bool getCoins(int coins) // can be positive or neg
     {
-        experience += exp;
-        if (experience > 50) levelUp();
-    }
-
-    protected virtual void levelUp()
-    {
-
+        if(this.coins + coins > 0)
+        {
+            this.coins += coins;
+            return true;
+        }
+        return false;
     }
 
     protected virtual Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player

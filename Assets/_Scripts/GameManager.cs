@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
         //intiate event sceneLoaded and loading
         SceneManager.sceneLoaded += LoadGame;
-        DontDestroyOnLoad(gameObject); //allows gameManager object to stay when loading new level
+        DontDestroyOnLoad(gameObject); // allows gameManager object to stay when loading new level
     } 
 
     //Resources, keep track of player, their weapons, and xp 
