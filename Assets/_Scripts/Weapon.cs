@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        // this doesnt work
         hits.Clear();
 
         Physics2D.GetContacts(box, contact, hits);

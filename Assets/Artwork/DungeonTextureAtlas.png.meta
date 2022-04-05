@@ -3031,6 +3031,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: fire_blast
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 123
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bb3b400721aa0d468599a5b91d102a5
+      internalID: 1532012573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_2
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da2dc73ee92f52e4e81317df70fb8592
+      internalID: 1018244134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3069,6 +3111,7 @@ TextureImporter:
       floor_2: -3723137209404464662
       floor_10: -3781266325377831062
       chest_1_closed: 7352966466517076983
+      player_2: 1018244134
       stair_top_right: 7863908544756488552
       grime_bot: 5017738458556700787
       floor_6: 5201237969506946998
@@ -3164,6 +3207,7 @@ TextureImporter:
       wall_trans_1: -4266960674147292559
       floor: 3699917174494235123
       dagger_0: 2967188529763112628
+      fire_blast: 1532012573
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
