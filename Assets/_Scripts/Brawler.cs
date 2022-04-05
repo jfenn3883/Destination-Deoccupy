@@ -11,11 +11,24 @@ public class Brawler : Player
     private float nextCharge;
     private bool isCharging;
 
+    private Animator anim;
+
+    protected override void Start()
+    {
+        base.Start();
+        anim = GetComponent<Animator>();
+    }
+
     protected override void Update() {
         if (!isCharging)
         {
             inputs = GetInputs();
             moveDelta = new Vector3(inputs["x"], inputs["y"]);
+
+            if (inputs["right"] != 0) weapon.attack(0);
+            else if (inputs["up"] != 0) weapon.attack(1);
+            else if (inputs["left"] != 0) weapon.attack(2);
+            else if (inputs["down"] != 0) weapon.attack(3);
         } 
     }
 
@@ -28,11 +41,6 @@ public class Brawler : Player
         else if (isCharging && Time.time > nextCharge - (chargeCooldown - chargeDuration)) isCharging = false;
 
         move();
-
-        if (inputs["right"] != 0) weapon.attack(0);
-        else if (inputs["up"] != 0) weapon.attack(1);
-        else if (inputs["left"] != 0) weapon.attack(2);
-        else if (inputs["down"] != 0) weapon.attack(3);
     }
 
     protected override void move()
