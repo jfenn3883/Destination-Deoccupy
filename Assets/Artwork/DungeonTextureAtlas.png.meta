@@ -981,8 +981,8 @@ TextureImporter:
         y: 225
         width: 8
         height: 21
-      alignment: 9
-      pivot: {x: 0.5070858, y: 0.13492258}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1002,8 +1002,8 @@ TextureImporter:
         y: 225
         width: 10
         height: 21
-      alignment: 9
-      pivot: {x: 0.5044769, y: 0.1411329}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1023,8 +1023,8 @@ TextureImporter:
         y: 225
         width: 10
         height: 21
-      alignment: 9
-      pivot: {x: 0.5, y: 0.15}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1044,8 +1044,8 @@ TextureImporter:
         y: 225
         width: 10
         height: 21
-      alignment: 9
-      pivot: {x: 0.5, y: 0.14549328}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1065,8 +1065,8 @@ TextureImporter:
         y: 225
         width: 8
         height: 27
-      alignment: 9
-      pivot: {x: 0.48752403, y: 0.11562545}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1086,8 +1086,8 @@ TextureImporter:
         y: 193
         width: 6
         height: 27
-      alignment: 9
-      pivot: {x: 0.5, y: 0.12301692}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1107,8 +1107,8 @@ TextureImporter:
         y: 129
         width: 7
         height: 17
-      alignment: 9
-      pivot: {x: 0.47148785, y: 0.08323131}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1128,8 +1128,8 @@ TextureImporter:
         y: 145
         width: 6
         height: 10
-      alignment: 9
-      pivot: {x: 0.49999747, y: 0.04096527}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1149,8 +1149,8 @@ TextureImporter:
         y: 145
         width: 6
         height: 13
-      alignment: 9
-      pivot: {x: 0.49999747, y: 0.024080716}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1170,8 +1170,8 @@ TextureImporter:
         y: 145
         width: 6
         height: 13
-      alignment: 9
-      pivot: {x: 0.49999747, y: 0.008728027}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1191,8 +1191,8 @@ TextureImporter:
         y: 145
         width: 6
         height: 13
-      alignment: 9
-      pivot: {x: 0.48336792, y: 0.008728027}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1212,8 +1212,8 @@ TextureImporter:
         y: 129
         width: 8
         height: 18
-      alignment: 9
-      pivot: {x: 0.49999905, y: 0.028771294}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1233,8 +1233,8 @@ TextureImporter:
         y: 209
         width: 10
         height: 37
-      alignment: 9
-      pivot: {x: 0.49001923, y: 0.13590303}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3032,7 +3032,49 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_blast
+      name: damageBullet
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 123
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9fbd104c22b54342a4680069eeea372
+      internalID: -745666252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammoBullet
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 123
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aba2aec11fcb2884eb835c3aa639d5fb
+      internalID: -1573654225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireRateBullet
       rect:
         serializedVersion: 2
         x: 121
@@ -3046,19 +3088,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bb3b400721aa0d468599a5b91d102a5
-      internalID: 1532012573
+      spriteID: e2cc6f94e7a72be4d9b4bd193750eccb
+      internalID: 429181538
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_2
+      name: greenStaff
       rect:
         serializedVersion: 2
-        x: 144
-        y: 16
-        width: 16
+        x: 135
+        y: 166
+        width: 2
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -3067,20 +3109,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da2dc73ee92f52e4e81317df70fb8592
-      internalID: 1018244134
+      spriteID: da4008c67ef3e9849b35b52002fc6eb0
+      internalID: 2046274563
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bigbaddie
+      name: redStaff
       rect:
         serializedVersion: 2
-        x: 128
-        y: 47
-        width: 32
-        height: 32
+        x: 151
+        y: 166
+        width: 2
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3088,8 +3130,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de6b66532c44850469eb1d308660041e
-      internalID: -1926963731
+      spriteID: d99a76bf33e4d4747bae846b5bb08f42
+      internalID: 2138807492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blackStaff
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 166
+        width: 2
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a143f7001a931bb488a44de23032dab4
+      internalID: -704579248
       vertices: []
       indices: 
       edges: []
@@ -3127,18 +3190,18 @@ TextureImporter:
       outline_block: -6568706333237257378
       candle_7_top: 8814942395439215086
       goblin_1: 433054484079525891
+      greenStaff: 2046274563
       hammer_1: -5823017365522433922
       stair_mid_right: -489145464312765865
       floor_2: -3723137209404464662
       floor_10: -3781266325377831062
       chest_1_closed: 7352966466517076983
-      player_2: 1018244134
       stair_top_right: 7863908544756488552
       grime_bot: 5017738458556700787
       floor_6: 5201237969506946998
       green_leak_top: -1590238840265045416
-      chest_1_empty: -2535141986347977635
       floor_0: 3745403098767717252
+      chest_1_empty: -2535141986347977635
       red_banner: 3399864019309071141
       candle_2_top: -3583250079051903717
       blue_pipe_0: -5197122946799840818
@@ -3165,6 +3228,7 @@ TextureImporter:
       wall_trans_2: -3747247672008095214
       pipe_top: 5878256708185574689
       katana_1: -8178404068842708257
+      ammoBullet: -1573654225
       blue_spew_0_bot_right: -5126588533612714225
       wall_0: 3844707701848475744
       outline_path: 4482298720749556486
@@ -3178,6 +3242,7 @@ TextureImporter:
       dagger_2: 1649631861342547655
       candle_4_top: -4314288676672103087
       railing_2: -7081202274553337659
+      redStaff: 2138807492
       player_0: -5747124542107903975
       floor_4: 8260865968740137126
       candle_1_top: -561864329894649317
@@ -3196,6 +3261,7 @@ TextureImporter:
       chest_1_opening: -1848640602583966169
       candle_3_top: 2209921034065533020
       red_spew_0_left: -6473138599549933766
+      fireRateBullet: 429181538
       player_1: -6670537300318210354
       pipe_mid: -3189471417409452629
       railing_1: 2900851839919401148
@@ -3218,18 +3284,18 @@ TextureImporter:
       candle_8_top: -3950205348326995400
       floor_1: -178956070228431561
       railing_0: 8292788780717732439
+      damageBullet: -745666252
       candle_1_bot: -8946294208417421945
       blue_pipe_2: 8781153787079572575
       firespirit_0: -7165046773270234581
       blue_spew_1_top: 2440537749383380252
       green_leak_bot: 5395353309081883948
       pipe_empty_bot: -5864360682941979663
-      bigbaddie: -1926963731
       pipe_bot: 2847715911200670481
       wall_trans_1: -4266960674147292559
-      dagger_0: 2967188529763112628
       floor: 3699917174494235123
-      fire_blast: 1532012573
+      dagger_0: 2967188529763112628
+      blackStaff: -704579248
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
