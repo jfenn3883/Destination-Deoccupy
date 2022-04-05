@@ -7,12 +7,16 @@ public class Cowgirl : Player
     // gun variables
     public int bullets = 6;
     public float reloadSpeed;
-    public bool isReloading = false;
+    protected bool isReloading = false;
     protected int loaded;
     public float shotCooldown = 0.5f;
     protected float nextShot;
     public float reloadCooldown = 4f;
     public int gunDamage = 2;
+    public float rollCooldown = 20f;
+    public float rollDuration = 1f;
+    protected float nextRoll;
+    protected bool isRolling = false;
     protected ContactFilter2D contact = new ContactFilter2D();
     
 
@@ -41,6 +45,21 @@ public class Cowgirl : Player
         if (isReloading && Time.time > nextShot) isReloading = false; 
     }
 
+    protected override void FixedUpdate()
+    {
+        if (inputs["space"] == 1 && Time.time > nextRoll)
+        {
+            isRolling = true;
+            nextRoll = Time.time + rollCooldown;
+        }
+        else if (isRolling && Time.time > nextRoll - (rollCooldown - rollDuration))
+        {
+            isRolling = false;
+            transform.localRotation = new Quaternion();
+        }
+        move();
+    }
+
     protected override void move()
     {
         if (moveDelta.x > 0)
@@ -52,7 +71,12 @@ public class Cowgirl : Player
             transform.localScale = new Vector2(-1, 1);// double check
         }
 
-        if(isReloading)
+        if(isRolling)
+        {
+            roll();
+            hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.magnitude * Time.deltaTime * speed), LayerMask.GetMask("Enemy", "Blocking"));
+            if (hit.collider == null) transform.Translate(moveDelta * Time.deltaTime * speed);
+        } else if(isReloading)
         {
             hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.magnitude * Time.deltaTime * reloadSpeed), LayerMask.GetMask("Enemy", "Blocking"));
             if (hit.collider == null) transform.Translate(moveDelta * Time.deltaTime * reloadSpeed);
@@ -98,8 +122,12 @@ public class Cowgirl : Player
                 if (hit.collider != null && hit.collider.gameObject.tag == "Enemy") hit.collider.gameObject.GetComponent<Enemy>().damage(gunDamage);
             }
         }
+    }
 
-        
-        
+    protected void roll()
+    {
+        loaded = bullets;
+        float angle = 360 / rollDuration;
+        transform.Rotate(new Vector3(0, 0, -moveDelta.x), angle * Time.deltaTime);
     }
 }

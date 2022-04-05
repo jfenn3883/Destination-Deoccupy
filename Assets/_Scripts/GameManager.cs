@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     //References
     public Player_0 player;
     
-
     //logic
     public int coins;
     public int xpPoints;
