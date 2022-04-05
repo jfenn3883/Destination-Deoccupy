@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class Player_1 : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
     // player attributes
     public int health;
     public int coins;
     public float speed;
-    public int damage; // if deal dmg gets taken out, take this out as well
-    public float experience; 
- // last occurrence
-  public float lastTakeDmg;
-  public float lastAttack; 
+    public float experience;
+    public Weapon weapon;
+
+    // last occurrence
+    public float lastTakeDmg;
+    public float lastAttack; 
     // cooldowns
     public float takeDmgCooldown = 1f;
     public float attackCooldown = 1f;
@@ -25,9 +26,9 @@ public abstract class Player_1 : MonoBehaviour
     protected Vector3 moveDelta;
     protected RaycastHit2D hit;
     protected Dictionary<string, int> inputs;
-    protected Vector3 moveDir ;
     protected bool isHit = false;
-    protected Enemy enemy; // if deal dmg gets taken out, take this out as well
+
+    protected Vector3 lastPos;
 
     protected virtual void Start()
     {
@@ -39,43 +40,40 @@ public abstract class Player_1 : MonoBehaviour
     protected virtual void Update()
     {
         inputs = GetInputs();
+        moveDelta = new Vector3(inputs["x"], inputs["y"]);
     }
 
     protected virtual void FixedUpdate() {
-
+        move();
     }
       
 
-
-    protected virtual void move(float speed) {
+    protected virtual void move() {
       
-        //Swap Sprite direction, when moving
+       //Swap Sprite direction, when moving
        if(moveDelta.x > 0)
        {
            transform.localScale = Vector3.one;
        }
        else if( moveDelta.x < 0)
        {
-            transform.localScale = new Vector3(-1,1,0);// double check
+            transform.localScale = new Vector3(-1, 1);// double check
        }
 
-       moveDir = new Vector3(moveDelta.x,moveDelta.y, 0).normalized;
+        // Use BoxCast to see if our BoxCollider will run into a BoxCollider on the Enemy or Blocking Layers
+        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.magnitude * Time.deltaTime * speed), LayerMask.GetMask("Enemy", "Blocking"));
+        if (hit.collider == null)
+        {
+            lastPos = transform.position;
+            //move object in x
+            transform.Translate(moveDelta.x * Time.deltaTime * speed, moveDelta.y * Time.deltaTime * speed, 0);
+        }
 
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Enemy", "Blocking"));
-       if(hit.collider == null)
-       {
-           //move object in y
-         transform.Translate(0,moveDelta.y * Time.deltaTime*speed,0);
-       
-       }
-       
-       hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x,0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Enemy", "Blocking"));
-       if(hit.collider == null)
-       {
-           //move object in x
-         transform.Translate(moveDelta.x * Time.deltaTime*speed,0,0);
-       }
-      
+    }
+
+    protected virtual void attack()
+    {
+
     }
 
     protected virtual void takeDmg(int dmg) {
@@ -88,24 +86,15 @@ public abstract class Player_1 : MonoBehaviour
                 this.health -= dmg; // decrease health;
             }
        }
-       else
-       {
-           return;
-       }
-       
     }
 
-    // probably going to go in weapons
-    protected virtual void dealDmg(Enemy enemy, int dmg) {
-       // enemy.takeDmg(dmg);
-    }
     protected virtual void GetExperience(int xpAmount) {
         if(experience < 50)
         {
             experience += xpAmount;
         }
     }
-    protected virtual void  Leveling()
+    protected virtual void Leveling() // REDO
     {
         int level = 1;
         if(experience == 50)
@@ -118,6 +107,7 @@ public abstract class Player_1 : MonoBehaviour
 
         }
     }
+
     protected virtual bool checkAlive() {
       bool alive = true;
         if(health > 0)
@@ -127,8 +117,8 @@ public abstract class Player_1 : MonoBehaviour
         else if(health <= 0)
         {
             alive = false;
-            Destroy(this.gameObject); //destroy the player
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//reloads game ***needs to be changed****
+            Destroy(this.gameObject); // destroy the player
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);// reloads game ***needs to be changed****
         }
         return alive; 
         
@@ -143,7 +133,7 @@ public abstract class Player_1 : MonoBehaviour
         }
         else 
         {
-            return; ///need to use floating text to display messeage!
+            return; // need to use floating text to display messeage!
         }
        
     }
@@ -180,5 +170,11 @@ public abstract class Player_1 : MonoBehaviour
         if (Input.GetKey(KeyCode.Q)) inputs["q"] = 1;
 
         return inputs;
-    } 
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        print("fuck");
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy") transform.position = lastPos;
+    }
 }
