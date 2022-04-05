@@ -83,6 +83,16 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    public bool getCoins(int coins) // can be positive or neg
+    {
+        if(this.coins + coins > 0)
+        {
+            this.coins += coins;
+            return true;
+        }
+        return false;
+    }
+
     protected virtual Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
     {
         Dictionary<string, int> inputs = new Dictionary<string, int>();
