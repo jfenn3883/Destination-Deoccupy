@@ -3061,7 +3061,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3069,6 +3069,27 @@ TextureImporter:
       bones: []
       spriteID: da2dc73ee92f52e4e81317df70fb8592
       internalID: 1018244134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bigbaddie
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 47
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de6b66532c44850469eb1d308660041e
+      internalID: -1926963731
       vertices: []
       indices: 
       edges: []
@@ -3203,10 +3224,11 @@ TextureImporter:
       blue_spew_1_top: 2440537749383380252
       green_leak_bot: 5395353309081883948
       pipe_empty_bot: -5864360682941979663
+      bigbaddie: -1926963731
       pipe_bot: 2847715911200670481
       wall_trans_1: -4266960674147292559
-      floor: 3699917174494235123
       dagger_0: 2967188529763112628
+      floor: 3699917174494235123
       fire_blast: 1532012573
   spritePackingTag: 
   pSDRemoveMatte: 0
