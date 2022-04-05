@@ -13,16 +13,18 @@ public class Cowgirl : Player
     protected float nextShot;
     public float reloadCooldown = 4f;
     public int gunDamage = 2;
+    protected ContactFilter2D contact = new ContactFilter2D();
     
 
     // private vars
-    protected RaycastHit2D[] raycast = new RaycastHit2D[10];
+    protected List<RaycastHit2D> raycast = new List<RaycastHit2D>();
 
     protected override void Start()
     {
         base.Start();
         loaded = bullets;
         reloadSpeed = speed / 2;
+        contact.layerMask = LayerMask.GetMask("Enemy");
     }
 
     protected override void Update()
@@ -80,9 +82,9 @@ public class Cowgirl : Player
 
     protected void fireGun(int dir)
     {
-        if(dir == 0 || dir == 2) raycast = Physics2D.RaycastAll(boxCollider.bounds.center, new Vector2(moveDelta.x, 0), LayerMask.GetMask("Enemy"));
-        else if(dir == 1) raycast = Physics2D.RaycastAll(boxCollider.bounds.center, new Vector2(0, 1), LayerMask.GetMask("Enemy"));
-        else if (dir == 3) raycast = Physics2D.RaycastAll(boxCollider.bounds.center, new Vector2(0, -1), LayerMask.GetMask("Enemy"));
+        if(dir == 0 || dir == 2) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(moveDelta.x, 0), contact, raycast, Mathf.Infinity);
+        else if(dir == 1) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(0, 1), contact, raycast, Mathf.Infinity);
+        else if (dir == 3) Physics2D.Raycast(boxCollider.bounds.center, new Vector2(0, -1), contact, raycast, Mathf.Infinity);
 
         foreach(RaycastHit2D hit in raycast)
         {
@@ -90,6 +92,6 @@ public class Cowgirl : Player
             hit.collider.gameObject.GetComponent<Enemy>().damage(gunDamage);
         }
 
-        raycast = new RaycastHit2D[10];
+        raycast = new List<RaycastHit2D>();
     }
 }
