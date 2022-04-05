@@ -8,6 +8,8 @@ public class Mage : Player
     public float attackCooldown = 1.5f;
     public float attackDistance = 5f;
 
+    public GameObject fire;
+
     protected ContactFilter2D contact = new ContactFilter2D();
     protected List<RaycastHit2D> raycast = new List<RaycastHit2D>();
 
@@ -16,11 +18,18 @@ public class Mage : Player
         base.Start();
 
         contact.layerMask = LayerMask.GetMask("Enemy");
+        fireAttack(0);
     }
 
-    protected void fireAttack()
+    protected void fireAttack(int dir)
     {
-
+        if(dir == 0)
+        {
+            for(int i = 1; i < 6; i++)
+            {
+                Instantiate(fire, new Vector2(this.transform.position.x + i, this.transform.position.y), new Quaternion());
+            }
+        }
     }
 
     protected void iceAttack(int dir)
