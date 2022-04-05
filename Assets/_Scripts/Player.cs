@@ -83,6 +83,17 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    public void exp(int exp)
+    {
+        experience += exp;
+        if (experience > 50) levelUp();
+    }
+
+    protected virtual void levelUp()
+    {
+
+    }
+
     protected virtual Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
     {
         Dictionary<string, int> inputs = new Dictionary<string, int>();
