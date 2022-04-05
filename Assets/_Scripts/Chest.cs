@@ -20,7 +20,7 @@ public class Chest : Collectable
         base.onCollect();
         if(collected){
             GetComponent<SpriteRenderer>().sprite = emptyChest;
-            GameManager.gameInstance.showText("+" + coins.ToString(), 20, Color.yellow, new Vector3(0,0,0), Vector3.up * 2, 1);
+            //GameManager.gameInstance.showText("+" + coins.ToString(), 20, Color.yellow, new Vector3(0,0,0), Vector3.up * 2, 1);
         }
         spriteRenderer.sprite = emptyChest;
     }

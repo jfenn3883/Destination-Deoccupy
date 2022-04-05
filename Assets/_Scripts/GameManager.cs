@@ -29,18 +29,18 @@ public class GameManager : MonoBehaviour
     //References
     public Player player;
     public FloatingTextManager floatingTextManager;
-    
+    //public weapon weapon...
 
     //logic
     public int coins;
     public int xpPoints;
     public int level;
-    //floating text 
-    public void showText(string message, int fontSize, Color colour, Vector3 position, Vector3 motion, float duration)
-    {
-        floatingTextManager.Show(message, fontSize, colour, position, motion, duration);
-    }
 
+    //floating text 
+    public void ShowText(string msg, int fontSize, Color colour, Vector3 position, Vector3 motion, float duration)
+    {
+       floatingTextManager.Show(msg,fontSize,colour,position, motion, duration);
+    }
     //save and load the game for progression
     public void SaveGame()
     {

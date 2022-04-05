@@ -27,7 +27,7 @@ public class FloatingText
        gamesObject.SetActive(active); 
     }
 
-    public void UpdateFLoatingTxt()
+    public void UpdateFloatingTxt()
     {
         if(!active) return;
         

@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
     isHit = true; //setting the boolean variable to show that the enemy has just been hit
     lastHit = Time.time; //saving the time the last hit occured
     health -= damage; //damaging the enemy
-    GameManager.gameInstance.showText("Player took " + damage + " damage",25,Color.black, new Vector3(0f, 0.0f, 0),Vector3.down * 20, 3f);
+    //GameManager.gameInstance.showText("Player took " + damage + " damage",25,Color.black, new Vector3(0f, 0.0f, 0),Vector3.down * 20, 3f);
 
     if(health <= 0){ //if the enemy is out of health
         Destroy(this.gameObject); //destroy the enemy 

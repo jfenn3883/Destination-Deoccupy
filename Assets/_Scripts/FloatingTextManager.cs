@@ -6,16 +6,19 @@ using UnityEngine.UI;
 
 public class FloatingTextManager : MonoBehaviour
 {
+  //all text will in a prefab
   public GameObject textContainer;
   public GameObject textPrefab;
 
   private List<FloatingText> floatingTexts = new List<FloatingText>();
 
 private void Update(){
-  for(int i = 0; i < floatingTexts.Count; i++){
-    floatingTexts[i].UpdateFLoatingTxt();
-  }
-  //txt.UpdateFLoatingTxt();
+ foreach (FloatingText txt in floatingTexts)
+    txt.UpdateFloatingTxt();
+  /*for(int i = 0; i < floatingTexts.Count; i++){
+    floatingTexts[i].UpdateFloatingTxt();
+  }*/
+  //txt.UpdateFloatingTxt();
 }
 public void Show(string messege, int fontSize, Color colour, Vector3 position, Vector3 motion, float duration )
 {
@@ -30,7 +33,7 @@ public void Show(string messege, int fontSize, Color colour, Vector3 position, V
 }
   private FloatingText GetFloatingText()
   {
-    FloatingText txt = floatingTexts.Find(t => !t.active);
+    FloatingText txt = floatingTexts.Find(t => !t.active); // looking for non active text 
     if(txt == null)
     {
         txt = new FloatingText();
@@ -38,7 +41,7 @@ public void Show(string messege, int fontSize, Color colour, Vector3 position, V
         txt.gamesObject.transform.SetParent(textContainer.transform);
         txt.txt = txt.gamesObject.GetComponent<Text>();
 
-        floatingTexts.Add(txt);
+        floatingTexts.Add(txt); // once new object created add to list 
     }
     return txt;
   }
