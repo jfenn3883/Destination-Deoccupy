@@ -21,9 +21,10 @@ public abstract class Player : MonoBehaviour
 
     // private components
     protected BoxCollider2D boxCollider;
+    protected Rigidbody2D body;
     
     // private vars
-    protected Vector3 moveDelta;
+    protected Vector2 moveDelta;
     protected RaycastHit2D hit;
     protected Dictionary<string, int> inputs;
     protected bool isHit = false;
@@ -33,6 +34,7 @@ public abstract class Player : MonoBehaviour
     protected virtual void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        body = GetComponent<Rigidbody2D>();
         inputs = GetInputs();
     }
 
@@ -40,7 +42,7 @@ public abstract class Player : MonoBehaviour
     protected virtual void Update()
     {
         inputs = GetInputs();
-        moveDelta = new Vector3(inputs["x"], inputs["y"]);
+        moveDelta = new Vector2(inputs["x"], inputs["y"]);
     }
 
     protected virtual void FixedUpdate() {
@@ -53,89 +55,20 @@ public abstract class Player : MonoBehaviour
        //Swap Sprite direction, when moving
        if(moveDelta.x > 0)
        {
-           transform.localScale = Vector3.one;
+           transform.localScale = Vector2.one;
        }
        else if( moveDelta.x < 0)
        {
-            transform.localScale = new Vector3(-1, 1);// double check
+            transform.localScale = new Vector2(-1, 1);// double check
        }
 
-        // Use BoxCast to see if our BoxCollider will run into a BoxCollider on the Enemy or Blocking Layers
-        hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.magnitude * Time.deltaTime * speed), LayerMask.GetMask("Enemy", "Blocking"));
+        hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.size, 0, new Vector2(moveDelta.x, moveDelta.y), Mathf.Abs(moveDelta.magnitude * Time.deltaTime * speed), LayerMask.GetMask("Enemy", "Blocking"));
         if (hit.collider == null)
         {
-            lastPos = transform.position;
-            //move object in x
-            transform.Translate(moveDelta.x * Time.deltaTime * speed, moveDelta.y * Time.deltaTime * speed, 0);
+            transform.Translate(moveDelta * Time.deltaTime * speed);
         }
 
-    }
 
-    protected virtual void attack()
-    {
-
-    }
-
-    protected virtual void takeDmg(int dmg) {
-        //***if statement missing collision with enemny or projectile ***
-       if(checkAlive()) 
-       {
-            if(Time.time - lastTakeDmg > takeDmgCooldown) // check last time taken damage against the cooldown time 
-            {
-                lastTakeDmg = Time.time; //set new last damage timer 
-                this.health -= dmg; // decrease health;
-            }
-       }
-    }
-
-    protected virtual void GetExperience(int xpAmount) {
-        if(experience < 50)
-        {
-            experience += xpAmount;
-        }
-    }
-    protected virtual void Leveling() // REDO
-    {
-        int level = 1;
-        if(experience == 50)
-        {
-            
-          health += 5;
-          experience = 0;
-          level++;
-          //text display the levelup and increase in health "Level up gained 5 health points
-
-        }
-    }
-
-    protected virtual bool checkAlive() {
-      bool alive = true;
-        if(health > 0)
-        {
-            alive = true; 
-        }
-        else if(health <= 0)
-        {
-            alive = false;
-            Destroy(this.gameObject); // destroy the player
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);// reloads game ***needs to be changed****
-        }
-        return alive; 
-        
-    }
-    protected virtual void GetCoins(int coinAmount) {
-        coins += coinAmount;
-    }
-    protected virtual void SpendCoins(int price) {
-        if(coins >= price && coins > 0)
-        {
-            coins -= price;
-        }
-        else 
-        {
-            return; // need to use floating text to display messeage!
-        }
-       
     }
 
     protected virtual Dictionary<string, int> GetInputs() // gets all the relevent inputs for the player
@@ -170,11 +103,5 @@ public abstract class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Q)) inputs["q"] = 1;
 
         return inputs;
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        print("fuck");
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy") transform.position = lastPos;
     }
 }

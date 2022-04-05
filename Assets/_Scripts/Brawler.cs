@@ -17,7 +17,7 @@ public class Brawler : Player
    
         chargeSpeed = speed * 2;
         chargeDamage = weapon.damage * 2;
-        
+  
    }   
     
     protected override void Update() {
