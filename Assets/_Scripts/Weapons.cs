@@ -17,7 +17,7 @@ public class Weapon : Collidable
    private SpriteRenderer SpriteRenderer;
 
    //Sword swing
-    private Animator anim;
+    public Animator anim;
     private float coolDown = 0.5f;
     private float lastSwing;
     
@@ -31,7 +31,7 @@ public class Weapon : Collidable
    protected override void Update()
    {
        base.Update();
-       anim.Play("swordSwing");
+       
     
 
        if(Input.GetKeyDown(KeyCode.Space)) //  Mouse0
@@ -63,7 +63,15 @@ public class Weapon : Collidable
    }
     private void Swing()
    {
-    anim.SetTrigger("Swing");
+     if(Input.GetKeyDown(KeyCode.RightArrow))   {
+         anim.Play("swordSwing");
+     }
+     if(Input.GetKeyDown(KeyCode.LeftArrow))   {
+         anim.Play("swordSwing");
+     }
+     if(Input.GetKeyDown(KeyCode.UpArrow))   {
+         anim.Play("swordUp");
+     }
    } 
 
 }
