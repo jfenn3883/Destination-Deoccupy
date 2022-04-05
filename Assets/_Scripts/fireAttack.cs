@@ -11,11 +11,13 @@ public class fireAttack : MonoBehaviour
 
     public float lifetime = 1f;
     public int fireDamage = 1;
+    protected float dis;
 
     protected void Start()
     {
         box = GetComponent<BoxCollider2D>();
         contact.layerMask = LayerMask.GetMask("Enemy");
+        dis = Time.time + lifetime;
     }
 
     protected void FixedUpdate()
@@ -27,5 +29,7 @@ public class fireAttack : MonoBehaviour
         {
             if (hit.gameObject.CompareTag("Enemy")) hit.gameObject.GetComponent<Enemy>().damage(fireDamage);
         }
+
+        if (Time.time > dis) Destroy(this.gameObject);
     }
 }

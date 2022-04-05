@@ -22,9 +22,6 @@ public class Enemy : MonoBehaviour
     public int damageCooldown = 1;
     protected float nextDamage;
 
-    // mage
-    protected float slowed = 0;
-
 
    protected virtual void Start()
    {
@@ -36,7 +33,7 @@ public class Enemy : MonoBehaviour
     {
         if(speed < topSpeed)
         {
-            speed += .1f;
+            speed += .01f;
         }
     }
 
@@ -84,6 +81,6 @@ public class Enemy : MonoBehaviour
 
     public void slow()
     {
-        slowed = speed / 2;
+        speed = speed / 8;
     }
 }
