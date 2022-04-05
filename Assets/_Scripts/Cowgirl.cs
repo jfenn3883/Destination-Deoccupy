@@ -80,9 +80,9 @@ public class Cowgirl : Player
 
     protected void fireGun(int dir)
     {
-        if(dir == 0 || dir == 2) raycast = Physics2D.BoxCastAll(boxCollider.bounds.center, new Vector2(.16f, .04f), 0, new Vector2(moveDelta.x, 0), LayerMask.GetMask("Enemy"));
-        else if(dir == 1) raycast = Physics2D.BoxCastAll(boxCollider.bounds.center, new Vector2(.16f, .04f), 90, new Vector2(0, 1), LayerMask.GetMask("Enemy"));
-        else if (dir == 3) raycast = Physics2D.BoxCastAll(boxCollider.bounds.center, new Vector2(.16f, .04f), 90, new Vector2(0, -1), LayerMask.GetMask("Enemy"));
+        if(dir == 0 || dir == 2) raycast = Physics2D.RaycastAll(boxCollider.bounds.center, new Vector2(moveDelta.x, 0), LayerMask.GetMask("Enemy"));
+        else if(dir == 1) raycast = Physics2D.RaycastAll(boxCollider.bounds.center, new Vector2(0, 1), LayerMask.GetMask("Enemy"));
+        else if (dir == 3) raycast = Physics2D.RaycastAll(boxCollider.bounds.center, new Vector2(0, -1), LayerMask.GetMask("Enemy"));
 
         foreach(RaycastHit2D hit in raycast)
         {
